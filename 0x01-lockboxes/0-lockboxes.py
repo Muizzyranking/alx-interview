@@ -1,28 +1,43 @@
 #!/usr/bin/python3
 """
-Method that determines if all the boxes can be opened.
+You have n number of locked boxes in front of you.
+Each box is numbered sequentially
+from 0 to n - 1 and each box may
+contain keys to the other boxes.
 """
 
 
 def canUnlockAll(boxes):
-    """Determines if all boxes can be opened.
+    """
+    This function (a method that) determines
+    if all the boxes can be opened.
 
     Args:
-      boxes: A list of lists representing the keys in each box.
+    :param boxes: A list of lists, where each sublist represents
+    the keys in a box thereby containing keys to other boxes.
 
     Returns:
-      True if all boxes can be opened, False otherwise.
+    :return: True if all boxes can be opened, or False otherwise.
     """
 
-    n = len(boxes)
-    visited = [False] * n
-    visited[0] = True  # First box is unlocked
+    # Check if `boxes` is a non-empty list
+    if not boxes or type(boxes) is not list or not isinstance(boxes, list):
+        # Return False if `boxes` is invalid
+        return False
 
-    def dfs(box):
-        visited[box] = True
-        for key in boxes[box]:
-            if not visited[key]:
-                dfs(key)
+    # Initialize a list to track unlocked boxes, starting with box 0
+    unlocked = [0]
 
-    dfs(0)
-    return all(visited)
+    # Iterate over unlocked boxes
+    for n in unlocked:
+        # Iterate over keys in the current box
+        for key in boxes[n]:
+            # Check if key is valid and not unlocked
+            if key not in unlocked and key < len(boxes):
+                # Add the new unlocked box to the list
+                unlocked.append(key)
+
+    # Check if all boxes have been unlocked
+    if len(unlocked) == len(boxes):
+        return True
+    return False
