@@ -1,9 +1,9 @@
 #!/usr/bin/node
 
-const request = require("request");
+const request = require('request');
 
 if (process.argv.length < 3) {
-  console.error("Usage: ./0-starwars_characters.js <movie_id>"); // where value of `movie_id` is 3
+  console.error('Usage: ./0-starwars_characters.js <movie_id>'); // where value of `movie_id` is 3
   process.exit(1);
 }
 
